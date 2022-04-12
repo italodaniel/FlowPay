@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "398919588505",
+    "project_id": "flowpay-2806c",
+    "storage_bucket": "flowpay-2806c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398919588505:android:39d29ea390be2209a73608",
+        "android_client_info": {
+          "package_name": "com.example.flowpay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398919588505-oc5u123kvos74que7nn4khdlsheiv7ub.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flowpay",
+            "certificate_hash": "92b4cbbd11c8d00d16ce8ef6d5612f1ff1712a51"
+          }
+        },
+        {
+          "client_id": "398919588505-ov8sc5uqdgn6ecl5ot8vp1r40itajacl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD93rjRnHDNu5YCkVicFMA__y_j1AidIb4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398919588505-ov8sc5uqdgn6ecl5ot8vp1r40itajacl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
