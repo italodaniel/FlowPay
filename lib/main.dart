@@ -1,22 +1,42 @@
-import 'package:flowpay/modules/login/login_page.dart';
-import 'package:flowpay/modules/splash/splash_page.dart';
-import 'package:flowpay/shared/themes/app_colors.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'app_widget.dart';
 
 void main() {
-  runApp(AppWidget());
+  runApp(AppFirebase());
 }
 
-class AppWidget extends StatelessWidget {
+class AppFirebase extends StatefulWidget {
+  @override
+  State<AppFirebase> createState() => _AppFirebaseState();
+}
+
+class _AppFirebaseState extends State<AppFirebase> {
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flow Pay',
-      theme: ThemeData(
-        primaryColor: AppColors.primary,
-      ),
-      home: LoginPage(),
-    );
+    return FutureBuilder(
+        future: _initialization,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Material(
+              child: Center(
+                child: Text(
+                  "Não foi possivel inicializasr ao firebase. Triste",
+                  textDirection: TextDirection.ltr,
+                ),
+              ),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            return AppWidget();
+          } else {
+            return Material(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+        });
   }
 }

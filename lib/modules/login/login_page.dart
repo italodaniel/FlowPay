@@ -3,6 +3,7 @@ import 'package:flowpay/shared/themes/app_images.dart';
 import 'package:flowpay/shared/themes/app_text_styles.dart';
 import 'package:flowpay/shared/widgets/socia_login/social_login_button.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -57,9 +58,21 @@ class _LoginPageState extends State<LoginPage> {
                   Padding(
                     padding:
                         const EdgeInsets.only(left: 40, right: 40, top: 40),
-                    child: SocialLoginButton(onTap: (){
-                      print("Clicou");
-                    },),
+                    child: SocialLoginButton(
+                      onTap: () async{
+                        GoogleSignIn _googleSignIn = GoogleSignIn(
+                          scopes: [
+                            'email',
+                          ],
+                        );
+                        try {
+                          final response =  await _googleSignIn.signIn();
+                          print(response);
+                        } catch (error) {
+                          print(error);
+                        }
+                      },
+                    ),
                   )
                 ],
               ),
