@@ -17,7 +17,7 @@ class AuthController {
       _user = user;
 
       //configuração de rotas nomeadas - chamdno na app_widget
-      Navigator.pushReplacementNamed(context, "/home");
+      Navigator.pushReplacementNamed(context, "/home", arguments: user);
     } else {
       Navigator.pushReplacementNamed(context, "/login");
     }

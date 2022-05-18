@@ -32,4 +32,6 @@ class BarcodeScannerStatus {
   bool get hasError => error.isNotEmpty;
 
   bool get hasBarcode => barcode.isNotEmpty;
+
+  get stopScanner => null;
 }

@@ -1,10 +1,10 @@
 import 'package:camera/camera.dart';
-import 'package:flowpay/modules/barcode_scanner/barcode_scanner_status.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'barcode_scanner_status.dart';
 
 class BarcodeScannerController {
   final statusNotifier =
@@ -22,28 +22,14 @@ class BarcodeScannerController {
       final response = await availableCameras();
       final camera = response.firstWhere(
           (element) => element.lensDirection == CameraLensDirection.back);
-      cameraController = CameraController(
-        camera,
-        ResolutionPreset.max,
-        enableAudio: false,
-      );
+      cameraController =
+          CameraController(camera, ResolutionPreset.max, enableAudio: false);
       await cameraController!.initialize();
-
+      scanWithCamera();
       listenCamera();
     } catch (e) {
       status = BarcodeScannerStatus.error(e.toString());
     }
-  }
-
-  void scanWothCamera() {
-    Future.delayed(Duration(seconds: 10)).then((value) {
-      if (status.cameraController != null) {
-        if (status.cameraController!.value.isStreamingImages)
-          status.cameraController!.stopImageStream();
-      }
-      status = BarcodeScannerStatus.error("Timeaut de leitura de voleto");
-    });
-    listenCamera();
   }
 
   Future<void> scannerBarCode(InputImage inputImage) async {
@@ -71,6 +57,14 @@ class BarcodeScannerController {
     final response = await ImagePicker().getImage(source: ImageSource.gallery);
     final inputImage = InputImage.fromFilePath(response!.path);
     scannerBarCode(inputImage);
+  }
+
+  void scanWithCamera() {
+    //status = BarcodeScannerStatus.available();
+    Future.delayed(Duration(seconds: 20)).then((value) {
+      if (status.hasBarcode == false)
+        status = BarcodeScannerStatus.error("Timeout de leitura de boleto");
+    });
   }
 
   void listenCamera() {
